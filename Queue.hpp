@@ -1,17 +1,17 @@
 #ifndef QUEUE_HPP
 #define QUEUE_HPP
 
-#include "LinkedList.hpp"
-#include <string>
-using namespace std;
+#include "LinkedList.hpp" 
+#include <string>         
 
-class AntrianPlanet {
+template <typename T>
+class Queue {
 private:
-    DaftarPlanet list;
+    LinkedList<T> list; 
 
 public:
-    void enqueue(string namaPlanet) {
-        list.addBack(namaPlanet);
+    void enqueue(T val) { 
+        list.addBack(val);
     }
 
     void dequeue() {
@@ -22,8 +22,8 @@ public:
         return list.isEmpty();
     }
 
-    void displayFront() {
-        list.displayFront();
+    T front() { 
+        return list.front();
     }
 
     void print() {

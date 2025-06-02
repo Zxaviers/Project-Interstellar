@@ -1,29 +1,30 @@
 #ifndef STACK_HPP
 #define STACK_HPP
 
-#include "LinkedList.hpp"
-#include <string>
-using namespace std;
-
+#include "LinkedList.hpp" 
+#include <string>         
+template <typename T>
 class Stack {
 private:
-    DaftarPlanet list;
+    LinkedList<T> list; 
 
 public:
-    void push(string nm) {
-        list.addFront(nm);
+    void push(T val) { 
+        list.addFront(val);
     }
+    
     void pop() {
         if (!isEmpty()) {
-            list.removeFront();}
+            list.removeFront();
+        }
     }
 
     bool isEmpty() {
         return list.isEmpty();
     }
- 
-    void displayTop() {
-        list.displayFront();
+    
+    T top() { 
+        return list.front();
     }
 
     void print() {

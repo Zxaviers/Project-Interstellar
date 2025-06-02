@@ -2,31 +2,34 @@
 #define LINKEDLIST_HPP
 
 #include <iostream>
-#include <string>
 using namespace std;
 
+template <typename T>
 struct Node {
-    string NamaPlanet;
+    T data;
     Node* next;
-    Node(string nm) {
-        NamaPlanet = nm;
+
+    Node(T val) {
+        data = val;
         next = nullptr;
     }
 };
 
-class DaftarPlanet {
+template <typename T>
+class LinkedList {
 private:
-    Node* head;
-    Node* tail;
+    Node<T>* head;
+    Node<T>* tail;
 
 public:
-    DaftarPlanet() {
-        head = nullptr;
-        tail = nullptr;
+    LinkedList() : head(nullptr), tail(nullptr) {}
+
+    Node<T>* getHead() {
+        return head;
     }
 
-    void addFront(string nm) {
-        Node* newNode = new Node(nm);
+    void addFront(T val) {
+        Node<T>* newNode = new Node<T>(val);
         if (isEmpty()) {
             head = tail = newNode;
         } else {
@@ -35,8 +38,8 @@ public:
         }
     }
 
-    void addBack(string nm) {
-        Node* newNode = new Node(nm);
+    void addBack(T val) {
+        Node<T>* newNode = new Node<T>(val);
         if (isEmpty()) {
             head = tail = newNode;
         } else {
@@ -47,7 +50,7 @@ public:
 
     void removeFront() {
         if (!isEmpty()) {
-            Node* temp = head;
+            Node<T>* temp = head;
             head = head->next;
             delete temp;
             if (head == nullptr) {
@@ -62,7 +65,7 @@ public:
                 delete head;
                 head = tail = nullptr;
             } else {
-                Node* current = head;
+                Node<T>* current = head;
                 while (current->next != tail) {
                     current = current->next;
                 }
@@ -77,20 +80,20 @@ public:
         return head == nullptr;
     }
 
-    void displayFront() {
+    T front() {
         if (!isEmpty()) {
-            cout << head->NamaPlanet << endl;
-        } else {
-            cout << "kosong" << endl;
+            return head->data;
+        }else {
+            throw runtime_error("Kosong");
         }
     }
 
     void print() {
         if (!isEmpty()) {
-            Node* current = head;
-            cout << "Daftar Planet: ";
+            Node<T>* current = head;
+            cout << "Isi List: ";
             while (current != nullptr) {
-                cout << current->NamaPlanet;
+                cout << current->data;
                 if (current->next != nullptr) {
                     cout << " -> ";
                 }
@@ -98,11 +101,11 @@ public:
             }
             cout << endl;
         } else {
-            cout << "Daftar planet kosong" << endl;
+            cout << "List kosong" << endl;
         }
     }
 
-    ~DaftarPlanet() {
+    ~LinkedList() {
         while (!isEmpty()) {
             removeFront();
         }
